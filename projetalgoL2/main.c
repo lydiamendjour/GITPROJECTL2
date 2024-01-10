@@ -35,3 +35,30 @@ void insertNode(int data) {
         newNode->prev = current;
     }
 }
+void deleteNodeByValue(int value) {
+    Node* current = head;
+
+    while (current != NULL) {
+        if (current->data == value) {
+            if (current->prev != NULL) {
+                current->prev->next = current->next;
+            } else {
+                head = current->next;
+            }
+
+            if (current->next != NULL) {
+                current->next->prev = current->prev;
+            }
+
+            
+            current->next = deletedNodes;
+            deletedNodes = current;
+
+            return;
+        }
+
+        current = current->next;
+    }
+
+    printf("Node with value %d not found in the list.\n", value);
+}
